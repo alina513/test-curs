@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/test-curs/static/css/main.51c3696a.css",
+    "main.js": "/test-curs/static/js/main.2a3b10e6.js",
+    "index.html": "/test-curs/index.html",
+    "main.51c3696a.css.map": "/test-curs/static/css/main.51c3696a.css.map",
+    "main.2a3b10e6.js.map": "/test-curs/static/js/main.2a3b10e6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.51c3696a.css",
+    "static/js/main.2a3b10e6.js"
+  ]
+}
