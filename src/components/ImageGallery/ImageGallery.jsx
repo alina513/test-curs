@@ -5,5 +5,6 @@ export const ImageGallery = ({images}) => {
         <ul className={css.gallery}>{images.map(image=><ImageGalleryItem image={image} key={image.id}/>)}
         
 </ul>
+
     )
 }
