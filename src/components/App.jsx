@@ -1,5 +1,4 @@
 import React from 'react';
-import  toast, { Toaster } from 'react-hot-toast';
 import CurrencyConverter from './Convertor/Convertor';
 export const App = () => {
     return (
@@ -14,7 +13,6 @@ export const App = () => {
         }}
       >
         <CurrencyConverter></CurrencyConverter>
-        <Toaster/>
       </div>
     );
   }
