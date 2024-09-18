@@ -9,9 +9,9 @@ export const fetchRatesUsd = async () => {
 };
 
 export const fetchRatesEur = async () => {
-    const response = await axios.get(
-      'https://api.exchangerate-api.com/v4/latest/EUR'
-    );
-    const rates = response.data.rates;
-    return rates;
-  };
+  const response = await axios.get(
+    'https://api.exchangerate-api.com/v4/latest/EUR'
+  );
+  const rates = response.data.rates;
+  return rates;
+};

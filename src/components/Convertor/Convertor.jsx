@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { fetchRatesUsd } from 'components/helpers/helpers';
+import {
+  Container,
+  Wrapper,
+  Title,
+  Input,
+  Select,
+  WrapperInput,
+} from './Convertor.styled';
 
 const Converter = () => {
   const [coin1, setCoin1] = useState('USD');
@@ -7,12 +15,14 @@ const Converter = () => {
   const [rates, setRates] = useState({});
   const [value1, setValue1] = useState(0.0);
   const [value2, setValue2] = useState(0.0);
+  const [isValue1Changing, setIsValue1Changing] = useState(true);
 
   useEffect(() => {
-    (async () => {
+    const fetchRates = async () => {
       const fetchedRates = await fetchRatesUsd();
       setRates(fetchedRates);
-    })();
+    };
+    fetchRates();
   }, []);
 
   useEffect(() => {
@@ -20,13 +30,13 @@ const Converter = () => {
       let rate;
       let converted;
 
-      if (value1 !== '') {
+      if (isValue1Changing) {
         rate = rates[coin2] / rates[coin1];
         converted = (value1 * rate).toFixed(2);
         if (converted !== value2) {
           setValue2(converted);
         }
-      } else if (value2 !== '') {
+      } else {
         rate = rates[coin1] / rates[coin2];
         converted = (value2 * rate).toFixed(2);
         if (converted !== value1) {
@@ -34,37 +44,41 @@ const Converter = () => {
         }
       }
     }
-  }, [value1, value2, coin1, coin2, rates]);
+  }, [value1, value2, coin1, coin2, rates, isValue1Changing]);
+
+  const handleValue1Change = e => {
+    setValue1(e.target.value);
+    setIsValue1Changing(true);
+  };
+
+  const handleValue2Change = e => {
+    setValue2(e.target.value);
+    setIsValue1Changing(false);
+  };
 
   return (
-    <div className="conteiner">
-      <h3>Enter the amount and currency for conversion</h3>
-      <div className="converter-section">
-        <input
-          type="number"
-          value={value1}
-          onChange={e => setValue1(e.target.value)}
-        />
-        <select value={coin1} onChange={e => setCoin1(e.target.value)}>
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="UAH">UAH</option>
-        </select>
-      </div>
+    <Container>
+      <Title>Enter the amount and currency for conversion</Title>
+      <Wrapper>
+        <WrapperInput>
+          <Input type="number" value={value1} onChange={handleValue1Change} />
+          <Select value={coin1} onChange={e => setCoin1(e.target.value)}>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="UAH">UAH</option>
+          </Select>
+        </WrapperInput>
 
-      <div className="converter-section">
-        <input
-          type="number"
-          value={value2}
-          onChange={e => setValue2(e.target.value)}
-        />
-        <select value={coin2} onChange={e => setCoin2(e.target.value)}>
-          <option value="UAH">UAH</option>
-          <option value="EUR">EUR</option>
-          <option value="USD">USD</option>
-        </select>
-      </div>
-    </div>
+        <WrapperInput>
+          <Input type="number" value={value2} onChange={handleValue2Change} />
+          <Select value={coin2} onChange={e => setCoin2(e.target.value)}>
+            <option value="UAH">UAH</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+          </Select>
+        </WrapperInput>
+      </Wrapper>
+    </Container>
   );
 };
 
