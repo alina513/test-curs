@@ -1,5 +1,6 @@
 import React from 'react';
-import CurrencyConverter from './Convertor/Convertor';
+import Converter from './Convertor/Convertor';
+import Header from './Header/Header';
 export const App = () => {
     return (
       <div
@@ -12,7 +13,8 @@ export const App = () => {
           color: '#010101',
         }}
       >
-        <CurrencyConverter></CurrencyConverter>
+        <Header></Header>
+        <Converter></Converter>
       </div>
     );
   }
